@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RestaurantDetailComponent} from './detail.component';
+import { RestaurantDetailComponent } from './detail.component';
 
 describe('DetailComponent', () => {
   let component: RestaurantDetailComponent;
@@ -8,9 +8,8 @@ describe('DetailComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RestaurantDetailComponent ]
-    })
-    .compileComponents();
+      declarations: [RestaurantDetailComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -23,4 +22,3 @@ describe('DetailComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

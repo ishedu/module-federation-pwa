@@ -1,30 +1,48 @@
 import { NgModule } from '@angular/core';
-import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { FileType, MfeUtil } from '../utils/mfe.utils';
+
+export const mef = new MfeUtil();
 
 const routes: Routes = [
   {
     path: 'home',
 
-    loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule),
+    loadChildren: () =>
+      import('./pages/home/home.module').then((m) => m.HomeModule),
   },
   {
     path: 'restaurants',
-    loadChildren: () => import('./pages/restaurant/restaurant.module').then(m =>  m.RestaurantModule),
+    loadChildren: () =>
+      mef
+        .loadRemoteFile({
+          remoteName: 'restaurant',
+          remoteEntry:
+            'https://module-federation-app2.web.app/remoteRestaurant.js',
+          exposedFile: 'RestaurantModule',
+          exposeFileType: FileType.Module,
+        })
+        .then((m) => m.RestaurantModule),
   },
   {
     path: 'order',
-    loadChildren: () => import('./pages/order/order.module').then(m => m.OrderModule),
+    loadChildren: () =>
+      import('./pages/order/order.module').then((m) => m.OrderModule),
   },
   {
-    path: '', redirectTo: 'home', pathMatch: 'full'
-  }
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    preloadingStrategy: PreloadAllModules,
-    scrollPositionRestoration: "enabled"
-  })],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled',
+      onSameUrlNavigation: 'reload',
+    }),
+  ],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

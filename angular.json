@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "cli": {
-    "analytics": "90b0eb33-70b8-448f-a5c9-072f6498ca93",
+    "analytics": "90b0eb33-70b8-448f-a5c9-072f6498ca93"
   },
   "version": 1,
   "newProjectRoot": "projects",
@@ -21,7 +21,7 @@
       "prefix": "pmo",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
             "outputPath": "dist/app1-home",
             "index": "src/index.html",
@@ -36,19 +36,23 @@
                 "glob": "**/*",
                 "input": "./node_modules/place-my-order-assets/images/",
                 "output": "./assets/images"
-              }
+              },
+              "src/manifest.webmanifest"
             ],
-            "styles": [
-              "src/styles.less"
-            ],
-            "scripts": []
+            "styles": ["src/styles.less"],
+            "scripts": [],
+            "customWebpackConfig": {
+              "path": "webpack.config.ts"
+            },
+            "serviceWorker": true,
+            "ngswConfigPath": "ngsw-config.json"
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
+                  "maximumWarning": "2mb",
                   "maximumError": "1mb"
                 },
                 {
@@ -57,6 +61,9 @@
                   "maximumError": "4kb"
                 }
               ],
+              "customWebpackConfig": {
+                "path": "webpack.config.prod.ts"
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -77,7 +84,7 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular-builders/custom-webpack:dev-server",
           "configurations": {
             "production": {
               "browserTarget": "app1-home:build:production"
@@ -105,11 +112,10 @@
             "inlineStyleLanguage": "less",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/manifest.webmanifest"
             ],
-            "styles": [
-              "src/styles.less"
-            ],
+            "styles": ["src/styles.less"],
             "scripts": []
           }
         }

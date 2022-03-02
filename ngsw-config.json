@@ -1,0 +1,46 @@
+{
+  "$schema": "./node_modules/@angular/service-worker/config/schema.json",
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "resources": {
+        "files": [
+          "/favicon.ico",
+          "/index.html",
+          "/manifest.webmanifest",
+          "/*.css",
+          "/polyfills.f03e3be7738cc50c.js",
+          "/main.385c7c894de6123a.js",
+          "/915.158cbfc5e9389d92.js",
+          "/154.9276c38543f8e44a.js"
+        ]
+      }
+    },
+    {
+      "name": "FederatedChunk",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": ["/remoteRestaurant.js"],
+        "urls": [
+          "https://module-federation-app2.web.app/*.js",
+          "https://module-federation-app3.web.app/*.js",
+          "https://place-my-order.firebaseapp.com/node_modules/place-my-order-assets/images/2-thumbnail.jpg"
+        ]
+      }
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "/assets/**",
+          "/*.(svg|cur|jpg|jpeg|png|apng|webp|avif|gif|otf|ttf|woff|woff2)"
+        ]
+      }
+    }
+  ]
+}

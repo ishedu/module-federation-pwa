@@ -1,16 +1,13 @@
-import {Component, OnInit, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'pmo-detail',
   templateUrl: './detail.component.html',
-  styleUrls: ['./detail.component.less']
+  styleUrls: ['./detail.component.less'],
 })
 export class DetailComponent implements OnInit {
-
   @Output() onClickBackButton = new EventEmitter();
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
